@@ -3,17 +3,19 @@ import axios from 'axios';
 import { Button,TextField } from '@material-ui/core/';
 
 const createEvent = () => {
-  const [event, setEvent] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
 
   const createEvent = (e) => {
 
-    console.log(event);
     e.preventDefault();
     const eventObject = {
-      event_title: event
+      userId: '60431e971c5bac068d2ef6e2',
+      name,
+      description,
     }
-    axios.post('http://localhost:3000/api/notes', eventObject)
+    axios.put('http://localhost:3000/api/users', eventObject)
       .then(res => {
         console.log(res);
       })
@@ -28,11 +30,17 @@ const createEvent = () => {
       <form action="">
         {/* <input placeholder='My Training Seminar' onChange={(e) => setEvent(e.target.value)} type="text" /> */}
         <TextField 
-        onChange={(e) => setEvent(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
         id="outlined-basic" 
         label="Event Name" 
         variant="outlined" />
         <br />
+        <TextField 
+        onChange={(e) => setDescription(e.target.value)}
+        id="outlined-basic" 
+        label="Event Description" 
+        variant="outlined" />
+        <br/>
         <Button
           variant="outlined"
           color="primary"
