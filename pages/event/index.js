@@ -7,7 +7,7 @@ const index = () => {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/users/60431e971c5bac068d2ef6e2')
+    axios.get('http://localhost:3000/api/users/604461283dca7f17814267a2')
       .then(res => {
         setEvents(res.data.data.events)
       })

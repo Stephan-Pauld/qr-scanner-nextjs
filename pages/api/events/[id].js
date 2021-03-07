@@ -33,13 +33,16 @@ export default async (req, res) => {
       }
       break;
     case 'PUT':
-
       try {
         const user = await User.find({ "events._id": `${id}` })
 
         if (!user) {
           return res.status(400).json({ success: false });
         }
+
+
+        // WE need to do a check if the email is in the db already!
+
 
         //specific user
         const query = {_id: user[0]._id}
