@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const EventSchema = new mongoose.Schema({
   name: String,
   description: String,
+  atendees: Array
 })
 
 const UserSchema = new mongoose.Schema ({

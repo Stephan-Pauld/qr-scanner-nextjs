@@ -11,9 +11,10 @@ const createEvent = () => {
 
     e.preventDefault();
     const eventObject = {
-      userId: '60431e971c5bac068d2ef6e2',
+      userId: '604461283dca7f17814267a2',
       name,
       description,
+      atendees: []
     }
     axios.put('http://localhost:3000/api/users', eventObject)
       .then(res => {

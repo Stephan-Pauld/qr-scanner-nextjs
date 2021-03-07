@@ -16,15 +16,14 @@ export default async (req, res) => {
       }
       break;
     case 'PUT':
-
+      console.log(body);
       try {
         const user = await User.findById(body.userId)
 
         if (!user) {
           res.status(400).json({ success: false });
         }
-
-        await user.events.push({ name: body.name, description: body.description })
+        await user.events.push({ name: body.name, description: body.description, atendees: body.atendees })
         user.save();
 
         res.status(201).json({ success: true, data: user })
