@@ -3,8 +3,10 @@ import QRCode from 'qrcode.react';
 import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core/';
 
+
+
 export const getStaticPaths = async () => {
-  const res = await axios('http://localhost:3000/api/users/604461283dca7f17814267a2')
+  const res = await axios(`http://localhost:3000/api/users/604461283dca7f17814267a2`)
 
   const paths = res.data.data.events.map(event => {
     return {
@@ -17,9 +19,16 @@ export const getStaticPaths = async () => {
   }
 }
 
+
 export const getStaticProps = async (context) => {
+
+  const getServerSideProps = async ({ req, res }) => {
+    
+    return { props: { token: req.cookies.token } }
+  }
   const id = context.params.id;
   const res = await axios('http://localhost:3000/api/users/604461283dca7f17814267a2')
+  console.log(getServerSideProps());
   for (const event of res.data.data.events) {
     if (event._id === id) {
       return {
@@ -30,6 +39,7 @@ export const getStaticProps = async (context) => {
 
 }
 
+
 const style = {
   page_layout: {
     display: 'flex',
@@ -39,7 +49,7 @@ const style = {
 }
 
 const eventDetails = ({ event }) => {
-  const [owner, setOwner] = useState(false)
+  const [owner, setOwner] = useState(true)
   const [email, setEmail] = useState('')
 
   const submitEmail = (e) => {

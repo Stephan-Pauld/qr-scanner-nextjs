@@ -3,11 +3,10 @@ import axios from 'axios';
 import Link from 'next/link'
 import styles from '../../styles/Events.module.css'
 
-const index = () => {
+const index = ({token}) => {
   const [events, setEvents] = useState([])
-
   useEffect(() => {
-    axios.get('http://localhost:3000/api/users/604461283dca7f17814267a2')
+    axios.get(`http://localhost:3000/api/users/${token}`)
       .then(res => {
         setEvents(res.data.data.events)
       })
@@ -15,8 +14,6 @@ const index = () => {
         console.log(err);
       })
   }, [])
-
-
 
   return (
     <>
@@ -31,5 +28,15 @@ const index = () => {
     </>
   )
 }
+
+
+// export function getServerSideProps({req, res}) {
+//   return {props: {token: req.cookies.token}}
+// }
+export async function getServerSideProps({req, res}) {
+  return {props: {token: req.cookies.token}}
+}
+
+
 
 export default index
